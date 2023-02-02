@@ -1,1 +1,1 @@
-
+This project concentrates on exploring unstable nanomagnets towards memory cells using Voltage and other signifincant possibiities of sources. One extremely interesting possibility being, using Light source as input and testing it.
