@@ -1,0 +1,25 @@
+SetGridsize(128, 128, 1);
+SetCellsize(2e-9, 2e-9, 2e-9);
+
+
+geometry :=  ellipse(80e-9, 60e-9) ;
+
+setgeom(geometry);
+
+Msat  = 978e3;
+Aex   = 13e-12;
+alpha = 0.01;
+Ku1 = 6.084e12;
+Temp = 300 ;
+
+anisU = vector(0, 1, 0);
+defregion(255, geometry.inverse());
+anisU.setregion(255, vector(1,0,0));
+m = RandomMag();
+
+relax();
+saveas(m, "uniform");
+autosave(m, 1e-19);
+TableAdd(m_full);
+TableAutoSave(1e-19) ;
+run(1000e-18);
