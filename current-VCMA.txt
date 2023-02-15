@@ -1,0 +1,46 @@
+M_sat := 9.78e+5;
+Msat = M_sat ;
+A0 := 1.0e-11; 
+A_ex := A0; 
+Aex = A_ex; 
+lex := sqrt(A_ex/(0.5*mu0*pow(M_sat, 2))) ;
+alpha = 0.03;
+Temp = 300 ;
+a := 100e-9 ; 
+c := 2e-9 ; 
+d:= 10e-9; 
+gridx := (a+d) ;
+gridy := (a+d) ;
+gridz := c ;
+l:= 0.75*lex ; 
+Nx := 2 * pow(2, ilogb(gridx/l)) ;
+Ny := Nx ;
+Nz := 2*pow(2, ilogb(gridz/l)) ;
+cell_size_x := gridx/Nx;
+cell_size_z := gridz/Nz ;
+SetGridSize(Nx, Ny, Nz);
+SetCellSize(cell_size_x, cell_size_x, cell_size_z);
+setPBC(3,3,0) ;
+print("Msat=", M_sat, "Aex=", A_ex, "alpha=", alpha, "l_ex=", lex, "l=", l);
+print("cell size(x)=", cell_size_x, "cell size(z)=", cell_size_z, "Nx=Ny=", Nx, "Nz=", Nz) ;
+EdgeSmooth = 8 ; 
+MinimizerStop = 1e-6 ;
+Island := ellipse (100e-9,90e-9);
+setgeom(Island);
+m = Uniform(0, 1, 0);
+ saveas(m, "uniform");
+TableAdd(m_full); 
+TableAdd(E_total); 
+TableAdd(E_exch) ;
+TableAdd(E_demag); 
+TableAdd(E_Zeeman);
+TableAdd(E_anis);
+TableAdd(Edens_total); 
+TableAdd(Edens_anis); 
+TableAdd(Edens_exch) ;
+TableAdd(Edens_demag) ;
+TableAutoSave(1e-12) ;
+run(1000e-12);
+
+
+
